@@ -22,8 +22,8 @@ class CheckPrice extends Component
         'fecha_nacimiento' => 'required',
         'paquete' => 'required',
         'plan' => 'required',
-        'inicio_viaje' => 'required',
-        'fin_viaje' => 'required',
+        'inicio_viaje' => 'required|date|before:fin_viaje',
+        'fin_viaje' => 'required|date|after:inicio_viaje',
     ];
 
     protected $messages = [
@@ -38,8 +38,12 @@ class CheckPrice extends Component
         'fecha_nacimiento.required' => 'Esta campo es obligatorio',
         'paquete.required' => 'Esta campo es obligatorio',
         'plan.required' => 'Esta campo es obligatorio',
-        'inicio_viaje.required' => 'Esta campo es obligatorio',
-        'fin_viaje.required' => 'Esta campo es obligatorio',
+        'inicio_viaje.required' => 'La fecha inicial es obligatoria',
+        'inicio_viaje.date' => 'Debes ingresar una fecha válida',
+        'inicio_viaje.before' => 'La fecha inicial no puede ser posterior o igual a la fecha final',
+        'fin_viaje.required' => 'La fecha final es obligatoria',
+        'fin_viaje.date' => 'Debes ingresar una fecha válida',
+        'fin_viaje.after' => 'La fecha final no puede ser anterior o igual a la fecha inicial',
     ];
 
 
