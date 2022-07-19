@@ -177,7 +177,7 @@
             <div class="grid grid-cols-3 gap-4">
                 @if ($switchCotizacion == true)
                 @foreach ($responseCotizacion['coberturas'] as $cobertura)
-                <div class="col-span-1 p-4 drop-shadow-lg rounded bg-blue-300">
+                <div class="col-span-1 p-4 drop-shadow-lg rounded bg-sky-200">
                     <div class="flex flex-col items-start">
                         <p>Descripción: {{ $cobertura['descripcion'] }}</p>
                         <p>Monto asegurado: {{ $cobertura['montoAsegurado'] }}</p>

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Http;
 
 class CheckPrice extends Component
 {
-    public $response, $rapi, $fecha_actual, $expiry_time, $token, $responseCotizacion, $switchCotizacion = false;
+    public $response, $fecha_actual, $expiry_time, $token, $responseCotizacion, $switchCotizacion = false;
     public $nombre_1, $nombre_2, $apellido_1, $apellido_2, $fecha_nacimiento, $paquete, $plan, $inicio_viaje, $fin_viaje;
     public $fFechaNacimiento, $fInicioViaje, $fFinViaje;
 
@@ -56,14 +56,14 @@ class CheckPrice extends Component
 
     public function createToken()
     {
-        $this->rapi = Http::asForm()->post('https://apiintegracion.ins-cr.com/v1/connect/token', [
+        $rapi = Http::asForm()->post('https://apiintegracion.ins-cr.com/v1/connect/token', [
             'grant_type' => 'client_credentials',
             'client_id' => '3101571319',
             'client_secret' => '4ea792b2-a70f-ce74-9646-b07a823ab669',
             'allowed_scopes' => '',
         ]);
 
-        $this->response = $this->rapi->collect($key = null)->all();
+        $this->response = $rapi->collect($key = null)->all();
         $this->token = $this->response['access_token'];
         $this->expiry_time = Carbon::now()->addSeconds(3600);
         $this->uploadTokenToDb($this->response, $this->expiry_time);
@@ -176,8 +176,8 @@ class CheckPrice extends Component
                         "SEGAPEBENEF4" => ""
                     ]
                 ]);
-            $this->switchCotizacion = true;
             $this->responseCotizacion = $this->responseCotizacion->collect($key = null)->all();
+            $this->switchCotizacion = true;
         } catch (Exception $ex) {
             dd($ex);
         }
@@ -192,7 +192,8 @@ class CheckPrice extends Component
         $this->apellido_2 == null ? $this->apellido_2 = '' : '';
     }
 
-    public function backToForm(){
+    public function backToForm()
+    {
         $this->switchCotizacion = false;
     }
 }
