@@ -164,9 +164,7 @@
         <h2 class="text-2xl font-bold text-gray-800">Cotización</h2>
         <div class="text-left">
             @if ($switchCotizacion == true)
-            <p class="mt-2">Número de cotización: {{ $responseCotizacion['numeroCotizacion'] }}</p>
-            <p class="mt-2">Moneda: {{ $responseCotizacion['descripcionMoneda'] }}</p>
-            <p class="mt-2">Monto anual: {{ $responseCotizacion['primas']['0']['montoPrima'] }}</p>
+            <p class="mt-2">Monto anual: {{ $responseCotizacion['primas']['0']['montoPrima'] }} USD</p>
             @endif
         </div>
 
